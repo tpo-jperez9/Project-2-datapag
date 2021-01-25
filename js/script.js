@@ -16,12 +16,12 @@ Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
 
-//global variables
+//global variables declared for open access 
 
 const searchInput = document.getElementById("search");
 const searchButton = searchInput.nextElementSibling;
 
-const showPage = (list, page) =>{
+const showPage = (list, page) =>{ //constant will show 9 students from the list per page
    let startIndex = (page *9) - 9;
    let endIndex = page * 9;
    let ul = document.querySelector(".student-list");
@@ -49,7 +49,8 @@ const showPage = (list, page) =>{
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
-//global function
+
+//global function for data pagination action buttons
 const addPagination = (list) =>{
 
    const numOfPagination = Math.ceil(list.length / 9);
@@ -75,7 +76,7 @@ const addPagination = (list) =>{
    });
    }
    
-const noResults = () =>{ //function when no student results are found
+const noResults = () =>{ // This const function runs when no student results are found
    const studentList = document.querySelector(".student-list");
    const paginationUL = document.querySelector(".link-list");
    const paginationLI = paginationUL.querySelectorAll("li");
@@ -87,7 +88,7 @@ const noResults = () =>{ //function when no student results are found
    }
 }
 
-///global function
+//global function for student search with loop and if else statement
      const searchStudents = () =>{
       const inputValue = searchInput.nodeValue.toLowerCase();
       const searchList = [];
@@ -104,7 +105,7 @@ const noResults = () =>{ //function when no student results are found
             showPage(searchList, 1);
 
          }
-          else{ //if no matches search will yield no results
+          else{ // else no matches search will yield no student results
             noResults();
          }
      }
@@ -120,7 +121,7 @@ const noResults = () =>{ //function when no student results are found
 // Call functions
 showPage(data,1);
 addPagination(data);
-additionalSearch(data);
+
 
 
 
