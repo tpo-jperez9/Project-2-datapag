@@ -19,10 +19,10 @@ This function will create and insert/append the elements needed to display a "pa
 //global variables declared for open access 
 
 const searchInput = document.getElementById("search");
-const searchButton = searchInput.nextElementSibling;
 
-const showPage = (list, page) =>{ //constant will show 9 students from the list per page
-   let startIndex = (page *9) - 9;
+// shows student on page. Students are in the list(array) and page is any number I want to start. 
+const showPage = (list, page) =>{ //function will show 9 students from the list per page
+   let startIndex = (page *9) - 9; 
    let endIndex = page * 9;
    let ul = document.querySelector(".student-list");
 
@@ -44,16 +44,15 @@ const showPage = (list, page) =>{ //constant will show 9 students from the list 
    }
 }
 
-
 /*
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 
-//global function for data pagination action buttons
+//global function for data pagination action buttons. List param is an array of student data.
 const addPagination = (list) =>{
 
-   const numOfPagination = Math.ceil(list.length / 9);
+   const numOfPagination = Math.ceil(list.length / 9); //max number of students per page
    const ul = document.querySelector(".link-list");
    ul.innerHTML = "";
 
@@ -63,60 +62,18 @@ const addPagination = (list) =>{
       </li`);
    }
 
-   const firstPagination = ul.querySelectorAll("button")[0];
+   const firstPagination = ul.querySelectorAll("button")[0]; //assignng variable to first page
    firstPagination.className = "active"; //Event listener to monitor when buttons are clicked
 
-   ul.addEventListener("click", (e) =>{
+   ul.addEventListener("click", (e) =>{   //monitoring for button click event. On click change className button to "active" and change prior active button to null. 
 
-      const active = ul.querySelector(".active");
+      const active = ul.querySelector(".active"); 
       active.className = "";
 
       e.target.className = "active";
-      showPage(list, e.target.textContent);
+      showPage(list, e.target.textContent);  //run showpage function
    });
    }
-   
-const noResults = () =>{ // This const function runs when no student results are found
-   const studentList = document.querySelector(".student-list");
-   const paginationUL = document.querySelector(".link-list");
-   const paginationLI = paginationUL.querySelectorAll("li");
-   studentList.innerHTML = "<p>No Results Located</p>";
-
-   for(let i = 0; i < paginationLI.length; i++){
-      paginationUL.removeChild(paginationLI[i]);
-
-   }
-}
-
-//global function for student search with loop and if else statement
-     const searchStudents = () =>{
-      const inputValue = searchInput.nodeValue.toLowerCase();
-      const searchList = [];
-
-      for(let i = 0; i < list.length; i++){ //for loop to search through last,first student names
-         let fullName = list[i].name.first.toLowerCase();
-         fullName += " ";
-         fullName += list[i].name.last.toLowerCase();
-
-         if(fullName.includes(inputValue)){
-            searchList.push(list[i]);
-         }
-         if(searchList.length > 0){ //if statement to display student name matches
-            showPage(searchList, 1);
-
-         }
-          else{ // else no matches search will yield no student results
-            noResults();
-         }
-     }
- }
-
-            //event listeners
-     searchInput.addEventListener("keyup", searchStudents);
-     searchButton.addEventListener("click", searchStudents);
-   
-   
-
    
 // Call functions
 showPage(data,1);
